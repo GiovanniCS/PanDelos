@@ -53,8 +53,8 @@ public class PangeneIData {
 	    		cc = line.trim().split("\t");
 	    		genomeName = cc[0];
 	    		seqName = cc[1];
-				product = cc[2];
-				deducedBases = cc.length > 3 ? Integer.parseInt(cc[3].trim()) : 0;
+			product = cc[2];
+			deducedBases = cc.length > 3 ? Integer.parseInt(cc[3].trim()) : 0;
 	    	}
 	    	else{
 	    		seq = line.trim();
@@ -62,12 +62,12 @@ public class PangeneIData {
 	    		d.sequenceName.add(seqName);
 	    		genomeid = genomeID.get(genomeName);
 	    		if(genomeid == null){
-	    			genomeid = genomeID.size();
+				genomeid = genomeID.size();
 	    			genomeID.put(genomeName, genomeid);
 	    		}
 	    		d.sequenceGenome.add(genomeid);
-				d.sequenceDescription.add(product);
-				d.sequenceDeducedBases.add(deducedBases);
+			d.sequenceDescription.add(product);
+			d.sequenceDeducedBases.add(deducedBases);
 	    	}
 	    	nameLine = !nameLine;
 	    }
