@@ -111,6 +111,19 @@ public class Pangenes {
 							if(mins[i][j] > 0.0){
 								lsum = maxs[i][j] + mins[i][j];
 								scores[i][j] = ( mins[i][j]) / (maxs[i][j] + (li + lj - lsum));
+
+								String sequence1 = "", sequence2 = "";
+								double deducedBasesSeq1 = 0, deducedBasesSeq2 = 0;
+								int index = (i >= g1_size) ? genomeSets.get(g2).get(i - g1_size) : genomeSets.get(g1).get(i);
+								sequence1 = pid.sequences.get(index);
+								deducedBasesSeq1 = pid.sequenceDeducedBases.get(index);
+								index = (j >= g1_size) ? genomeSets.get(g2).get(j - g1_size) : genomeSets.get(g1).get(j);
+								sequence2 = pid.sequences.get(index);
+								deducedBasesSeq2 = pid.sequenceDeducedBases.get(index);
+								double deducedBasesCorrection = (deducedBasesSeq1 + deducedBasesSeq2) /
+										(sequence1.length() + sequence2.length());
+
+								scores[i][j] = scores[i][j] * (1 - deducedBasesCorrection);
 								percs[i][j] = percs[i][j] / (li);
 							}
 						}

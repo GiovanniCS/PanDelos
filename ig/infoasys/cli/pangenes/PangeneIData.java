@@ -16,6 +16,7 @@ public class PangeneIData {
 	public Vector<String> sequences = new Vector<String>();
 	public Vector<String> sequenceName =  new Vector<String>();
 	public Vector<String> sequenceDescription = new Vector<String>();
+	public Vector<Integer> sequenceDeducedBases = new Vector<Integer>();
 	
 	public Vector<Integer> sequenceGenome = new Vector<Integer>();
 	public Vector<String> genomeNames = new Vector<String>();
@@ -42,6 +43,7 @@ public class PangeneIData {
 		String line;
 		boolean nameLine = true;
 		String seqName=null, genomeName=null, product=null, seq;
+		int deducedBases=0;
 		String[] cc;
 		Map<String,Integer> genomeID = new HashMap<String,Integer>();
 		Integer genomeid;
@@ -51,7 +53,8 @@ public class PangeneIData {
 	    		cc = line.trim().split("\t");
 	    		genomeName = cc[0];
 	    		seqName = cc[1];
-	    		product = cc[2];
+				product = cc[2];
+				deducedBases = cc.length > 3 ? Integer.parseInt(cc[3].trim()) : 0;
 	    	}
 	    	else{
 	    		seq = line.trim();
@@ -63,7 +66,8 @@ public class PangeneIData {
 	    			genomeID.put(genomeName, genomeid);
 	    		}
 	    		d.sequenceGenome.add(genomeid);
-	    		d.sequenceDescription.add(product);
+				d.sequenceDescription.add(product);
+				d.sequenceDeducedBases.add(deducedBases);
 	    	}
 	    	nameLine = !nameLine;
 	    }
