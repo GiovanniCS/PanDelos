@@ -24,7 +24,8 @@ public class PangeneNELSA {
 	
 	public PangeneNELSA(PangeneIData pid){
 		this.sequenceID = pid.sequenceName;
-		this.sequenceGenome = pid.sequenceGenome;
+		for(Integer i : pid.sequenceGenome)
+			this.sequenceGenome.add(Integer.toString(i));
 		
 		int totalLength = 0;
 		for(String s : pid.sequences){

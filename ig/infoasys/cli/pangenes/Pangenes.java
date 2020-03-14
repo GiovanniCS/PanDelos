@@ -114,12 +114,11 @@ public class Pangenes {
 
 								String sequence1 = "", sequence2 = "";
 								double deducedBasesSeq1 = 0, deducedBasesSeq2 = 0;
-								int index = (i >= g1_size) ? genomeSets.get(g2).get(i - g1_size) : genomeSets.get(g1).get(i);
-								sequence1 = pid.sequences.get(index);
-								deducedBasesSeq1 = pid.sequenceDeducedBases.get(index);
-								index = (j >= g1_size) ? genomeSets.get(g2).get(j - g1_size) : genomeSets.get(g1).get(j);
-								sequence2 = pid.sequences.get(index);
-								deducedBasesSeq2 = pid.sequenceDeducedBases.get(index);
+								int indexI = mapLocal2Global[i], indexJ = mapLocal2Global[j];
+								sequence1 = pid.sequences.get(indexI);
+								deducedBasesSeq1 = pid.sequenceDeducedBases.get(indexI);
+								sequence2 = pid.sequences.get(indexJ);
+								deducedBasesSeq2 = pid.sequenceDeducedBases.get(indexJ);
 								double deducedBasesCorrection = (deducedBasesSeq1 + deducedBasesSeq2) /
 										(sequence1.length() + sequence2.length());
 
