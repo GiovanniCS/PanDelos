@@ -104,6 +104,9 @@ public class Pangenes {
 					
 					
 					double li,lj, lsum;
+					String sequence1 = "", sequence2 = "";
+					double deducedBasesSeq1 = 0, deducedBasesSeq2 = 0;
+					int indexI = 0, indexJ = 0;
 					for(int i=0; i<scores.length; i++){
 						li = (double)(pnelsa.sequenceLength.get(i) - k + 1);
 						for(int j=0; j<scores.length; j++){
@@ -112,9 +115,8 @@ public class Pangenes {
 								lsum = maxs[i][j] + mins[i][j];
 								scores[i][j] = ( mins[i][j]) / (maxs[i][j] + (li + lj - lsum));
 
-								String sequence1 = "", sequence2 = "";
-								double deducedBasesSeq1 = 0, deducedBasesSeq2 = 0;
-								int indexI = mapLocal2Global[i], indexJ = mapLocal2Global[j];
+								indexI = mapLocal2Global[i];
+								indexJ = mapLocal2Global[j];
 								sequence1 = pid.sequences.get(indexI);
 								deducedBasesSeq1 = pid.sequenceDeducedBases.get(indexI);
 								sequence2 = pid.sequences.get(indexJ);
