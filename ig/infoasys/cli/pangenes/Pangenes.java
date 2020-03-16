@@ -160,8 +160,11 @@ public class Pangenes {
 						
 						double[] max_inter_score = new double[scores.length];
 						Arrays.fill(max_inter_score, 0.0);
-						
-						
+
+						//max_inter_score_to[i] is the index j of the gene in the other genome with maximum score
+						int[] max_inter_score_to = new int[scores.length];
+						Arrays.fill(max_inter_score_to, -1);
+
 						//-x
 						//x0
 						for(int i=0; i<genomeSets.get(g1).size(); i++){
@@ -190,6 +193,7 @@ public class Pangenes {
 							for(int j=genomeSets.get(g1).size(); j<scores.length; j++){
 								if(scores[i][j] > max_inter_score[i]){
 									max_inter_score[i] = scores[i][j];
+									max_inter_score_to[i] = j;
 								}
 							}
 						}
@@ -199,6 +203,7 @@ public class Pangenes {
 							for(int j=0; j<genomeSets.get(g1).size(); j++){
 								if(scores[i][j] > max_inter_score[i]){
 									max_inter_score[i] = scores[i][j];
+									max_inter_score_to[i] = j;
 								}
 							}
 						}
@@ -311,8 +316,14 @@ public class Pangenes {
 								}
 							}
 						}
-						
-						
+
+						for (int i = 0; i < engagged.length; i++){
+							if (!engagged[i] && max_inter_score[i] > 0) {
+								pnet.addConnection(mapLocal2Global[i], mapLocal2Global[max_inter_score_to[i]], max_inter_score[i]);
+								engagged[i] = true;
+							}
+						}
+
 						System.out.println(pnet.countNodes()+"\t"+pnet.countEdges());
 					}
 					
